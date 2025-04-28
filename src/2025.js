@@ -22,5 +22,5 @@ export const order = [
 
 export const change = [
     [4, 0, 5, "Oklahoma City Thunder"],
-    [12, 0, 11, "Atlanta Hawks"]
+    [12, 0, 11, "Atlanta Hawks"],
 ]
