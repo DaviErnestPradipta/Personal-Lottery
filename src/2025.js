@@ -21,6 +21,6 @@ export const order = [
 // Name of new pick owner if pick falls outside the limits
 
 export const change = [
-    [4, 0, 5, "Oklahoma City Thunder"],
-    [12, 0, 11, "Atlanta Hawks"],
+    [4, 0, 5, "Oklahoma City Thunder (from Philadelphia 76ers)"],
+    [12, 0, 11, "Atlanta Hawks (from Sacramento Kings)"],
 ]

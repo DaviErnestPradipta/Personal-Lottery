@@ -5,14 +5,14 @@ let chance = [140, 140, 140, 125, 105, 90, 75, 60, 38, 37, 18, 17, 8, 7];
 // Initialization
 addLotteryTeams();
 addNonLotteryTeams();
-applyChanges();
+applyChanges(change);
 
 // Main Functions
 function addLotteryTeams() {
     for (let i = 0; i < 4; i++) {
-        const totalChance = getTotalChance(chance);
-        const lotteryNumber = getLotteryNumber(totalChance);
-        const lotteryIndex = getLotteryIndex(lotteryNumber);
+        let totalChance = getTotalChance(chance);
+        let lotteryNumber = getLotteryNumber(totalChance);
+        let lotteryIndex = getLotteryIndex(lotteryNumber);
         lotteryOrder.push(order[lotteryIndex]);
         chance[lotteryIndex] = 0;
     }
@@ -26,7 +26,7 @@ function addNonLotteryTeams() {
 
 function applyChanges(change) {
     for (let i = 0; i < change.length; i++) {
-        const lotteryResult = findTeamIndex(order[change[i][0]]);
+        let lotteryResult = findTeamIndex(order[change[i][0]]);
         if (lotteryResult < change[i][1] || lotteryResult > change[i][2]) {
             lotteryOrder[lotteryResult] = change[i][3];
         }        
