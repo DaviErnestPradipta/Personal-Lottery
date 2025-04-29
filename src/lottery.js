@@ -1,42 +1,61 @@
-import {order, change, chance, lotteryTeams} from './2025.js';
+// lottery.js
+import { order as initialOrder, change, chance as initialChance, lotteryTeams } from './2025.js';
 export const lotteryOrder = [];
+
+let order = [...initialOrder];
+let chance = [...initialChance];
 
 // Initialization
 addLotteryTeams();
 addNonLotteryTeams();
 applyChanges(change);
+export const resultID = getResultID(lotteryOrder);
 
 // Main Functions
 function addLotteryTeams() {
     for (let i = 0; i < lotteryTeams; i++) {
-        let totalChance = getTotalChance(chance);
-        let lotteryNumber = getLotteryNumber(totalChance);
-        let lotteryIndex = getLotteryIndex(lotteryNumber);
+        const totalChance = getTotalChance(chance);
+        if (totalChance === 0) {
+            throw new Error("No teams left with a valid chance!");
+        }
+        const lotteryNumber = getLotteryNumber(totalChance);
+        const lotteryIndex = getLotteryIndex(lotteryNumber);
+        
         lotteryOrder.push(order[lotteryIndex]);
-        chance[lotteryIndex] = 0;
+        order.splice(lotteryIndex, 1);
+        chance.splice(lotteryIndex, 1);
     }
 }
 
 function addNonLotteryTeams() {
-    for (let i = 0; i < chance.length; i++) {
-        if (chance[i] != 0) lotteryOrder.push(order[i]);
+    for (let i = 0; i < order.length; i++) {
+        lotteryOrder.push(order[i]);
     }
 }
 
 function applyChanges(change) {
     for (let i = 0; i < change.length; i++) {
-        let lotteryResult = findTeamIndex(order[change[i][0]]);
+        const originalTeamName = initialOrder[change[i][0]];
+        const lotteryResult = getTeamIndex(originalTeamName);
         if (lotteryResult < change[i][1] || lotteryResult > change[i][2]) {
             lotteryOrder[lotteryResult] = change[i][3];
-        }        
+        }
     }
 }
 
+function getResultID(lotteryOrder) {
+    let resultID = 0;
+    const totalTeams = lotteryOrder.length;
+    for (let i = 0; i < lotteryTeams - 1; i++) {
+        resultID += lotteryOrder[i] * getPermutation(totalTeams - (i + 1), lotteryTeams - (i + 1));
+    }
+    resultID += lotteryOrder[lotteryTeams - 1];
+    return resultID;
+}
+
 // Helper Functions
-function getTotalChance(chance) {
-    let totalChance = 0;
-    for (let i = 0; i < chance.length; i++) totalChance += chance[i];
-    return totalChance;
+function getTotalChance(chanceArray) {
+    return chanceArray.reduce((sum, value) => sum + value, 0);
 }
 
 function getLotteryNumber(totalChance) {
@@ -47,12 +66,31 @@ function getLotteryIndex(lotteryNumber) {
     let cumulativeChance = 0;
     for (let i = 0; i < chance.length; i++) {
         cumulativeChance += chance[i];
-        if (lotteryNumber <= cumulativeChance) return i;
+        if (lotteryNumber <= cumulativeChance) {
+            return i;
+        }
     }
+    throw new Error("Lottery number did not map to a valid team (chances may be broken).");
 }
 
-function findTeamIndex(teamName) {
+function getTeamIndex(teamName) {
     for (let i = 0; i < lotteryOrder.length; i++) {
-        if (lotteryOrder[i] === teamName) return i;
+        if (lotteryOrder[i] === teamName) {
+            return i;
+        }
     }
+    throw new Error(`Team ${teamName} not found in lottery order.`);
+}
+
+function getPermutation(totalObjects, objectsChosen) {
+    return getFactorial(totalObjects) / getFactorial(totalObjects - objectsChosen);
+}
+
+function getFactorial(number) {
+    let result = 1;
+    while (number > 1) {
+        result *= number;
+        number--; // decrement number, not result!
+    }
+    return result;
 }

@@ -23,7 +23,7 @@ export const order = [
 export const change = [
     [4, 0, 5, "PHI→OKC"],
     [12, 0, 11, "SAC→ATL"],
-]
+];
 
 export const chance = [140, 140, 140, 125, 105, 90, 75, 60, 38, 37, 18, 17, 8, 7];
 export const lotteryTeams = 4;
