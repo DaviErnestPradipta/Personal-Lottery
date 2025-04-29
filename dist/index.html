@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NBA Draft Lottery Simulator</title>
+    <link rel="stylesheet" href="609a232ab53e413e38d2.css">
 <script defer src="main.js"></script></head>
 <body>
     <header>NBA Draft Lottery Simulator</header>
     <div class="content">
+        <div class="dropdown-container">
+            <select name="year" id="year-select">
+                <option value="2025" selected>2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+            </select>
+            <button type="button" id="start-button">Start</button>
+        </div>
         <div class="draft-grid">
             <div class="draft-item">
                 <div class="draft-number">1</div>
