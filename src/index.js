@@ -7,41 +7,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const draftTeamElements = document.querySelectorAll('.draft-team');
     const draftTeamArray = [...draftTeamElements];
     const resultIDElement = document.querySelector('.result-ID');
-    let totalDelay = 0;
+    const startButton = document.querySelector('button[type="submit"]'); // Get the submit button
 
-    // Reveal non-lottery picks normally
-    for (let i = 0; i < lotteryOrder.length - lotteryTeams; i++) {
+    startButton.addEventListener('click', () => {
+        let totalDelay = 0;
+
+        // Clear any previous results
+        draftTeamArray.forEach(element => {
+            element.textContent = '';
+        });
+        resultIDElement.textContent = '';
+
+        // Reveal non-lottery picks normally
+        for (let i = 0; i < lotteryOrder.length - lotteryTeams; i++) {
+            totalDelay += ONE_SECOND;
+            setTimeout(() => {
+                draftTeamArray[lotteryOrder.length - (i + 1)].textContent =
+                lotteryOrder[lotteryOrder.length - (i + 1)];
+            }, totalDelay);
+        }
+
+        // Reveal lottery picks outside the top 2
+        for (let i = 0; i < lotteryTeams - 2; i++) {
+            totalDelay += ONE_SECOND * 3;
+            setTimeout(() => {
+                draftTeamArray[lotteryTeams - (i + 1)].textContent =
+                lotteryOrder[lotteryOrder.length - (i + 1)];
+            }, totalDelay);
+        }
+
+        // Reveal pick 2
+        totalDelay += ONE_SECOND * 5;
+        setTimeout(() => {
+            draftTeamArray[1].textContent = lotteryOrder[1];
+        }, totalDelay);
+
+        // Reveal pick 1
         totalDelay += ONE_SECOND;
         setTimeout(() => {
-            draftTeamArray[lotteryOrder.length - (i + 1)].textContent = 
-            lotteryOrder[lotteryOrder.length - (i + 1)];
+            draftTeamArray[0].textContent = lotteryOrder[0];
         }, totalDelay);
-    }
 
-    // Reveal lottery picks outside the top 2
-    for (let i = 0; i < lotteryTeams - 2; i++) {
-        totalDelay += ONE_SECOND * 3;
+        // Reveal resultID
+        totalDelay += ONE_SECOND;
         setTimeout(() => {
-            draftTeamArray[lotteryTeams - (i + 1)].textContent = 
-            lotteryOrder[lotteryOrder.length - (i + 1)];
+            resultIDElement.textContent = `Result ID: ${resultID}`;
         }, totalDelay);
-    }
-    
-    // Reveal pick 2
-    totalDelay += ONE_SECOND * 5;
-    setTimeout(() => {
-        draftTeamArray[1].textContent = lotteryOrder[1];
-    }, totalDelay);
-
-    // Reveal pick 1
-    totalDelay += ONE_SECOND;
-    setTimeout(() => {
-        draftTeamArray[0].textContent = lotteryOrder[0];
-    }, totalDelay);
-
-    // Reveal resultID
-    totalDelay += ONE_SECOND;
-    setTimeout(() => {
-        resultIDElement.textContent = `Result ID: ${resultID}`;
-    }, totalDelay);
+    });
 });
