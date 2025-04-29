@@ -73,7 +73,6 @@ function getLotteryIndex(lotteryNumber) {
             return i;
         }
     }
-    throw new Error("Lottery number did not map to a valid team (chances may be broken).");
 }
 
 function getTeamIndex(teamName) {
@@ -82,7 +81,6 @@ function getTeamIndex(teamName) {
             return i;
         }
     }
-    throw new Error(`Team ${teamName} not found in lottery order.`);
 }
 
 function getPermutation(totalObjects, objectsChosen) {
@@ -93,7 +91,7 @@ function getFactorial(number) {
     let result = 1;
     while (number > 1) {
         result *= number;
-        number--; // decrement number, not result!
+        number--;
     }
     return result;
 }
