@@ -38,14 +38,12 @@ async function loadDraftData(year) {
 
     let order = [...initialOrder];
     let chance = [...initialChance];
-
     let { lotteryOrder, remainingOrder } = addLotteryTeams(order, chance, lotteryTeams);
+    
     lotteryOrder = addNonLotteryTeams(lotteryOrder, remainingOrder);
     applyChanges(lotteryOrder, initialOrder, change);
-
-    // Add trade shift information to the UI
     addTradeShift(change, initialOrder);
-
+    
     return { initialOrder, lotteryOrder, lotteryTeams };
 }
 
@@ -74,7 +72,8 @@ function runRevealSequence(
     for (let i = 0; i < lotteryTeamsCount - 2; i++) {
         delay = revealPick(
             lotteryTeamsCount - (i + 1),
-            lotteryOrder[lotteryOrder.length - (lotteryOrder.length - lotteryTeamsCount + i + 1)],
+            lotteryOrder[lotteryOrder.length - 
+                (lotteryOrder.length - lotteryTeamsCount + i + 1)],
             delay + ONE_SECOND_DELAY * 3,
             currentRunID,
             currentRunID,
@@ -84,8 +83,10 @@ function runRevealSequence(
     }
 
     // Top 2 lottery picks
-    delay = revealPick(1, lotteryOrder[1], delay + ONE_SECOND_DELAY * 5, currentRunID, currentRunID, draftTeamArray, signal);
-    delay = revealPick(0, lotteryOrder[0], delay + ONE_SECOND_DELAY, currentRunID, currentRunID, draftTeamArray, signal);
+    delay = revealPick(1, lotteryOrder[1], delay + ONE_SECOND_DELAY * 5, 
+        currentRunID, currentRunID, draftTeamArray, signal);
+    delay = revealPick(0, lotteryOrder[0], delay + ONE_SECOND_DELAY, 
+        currentRunID, currentRunID, draftTeamArray, signal);
 
     return delay;
 }
