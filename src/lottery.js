@@ -1,5 +1,10 @@
 // lottery.js
-import { order as initialOrder, change, chance as initialChance, lotteryTeams } from './2025.js';
+import { 
+    order as initialOrder, 
+    change, 
+    chance as initialChance, 
+    lotteryTeams
+} from './2025.js';
 export const lotteryOrder = [];
 
 let order = [...initialOrder];
@@ -15,12 +20,8 @@ export const resultID = getResultID(lotteryOrder);
 function addLotteryTeams() {
     for (let i = 0; i < lotteryTeams; i++) {
         const totalChance = getTotalChance(chance);
-        if (totalChance === 0) {
-            throw new Error("No teams left with a valid chance!");
-        }
         const lotteryNumber = getLotteryNumber(totalChance);
         const lotteryIndex = getLotteryIndex(lotteryNumber);
-        
         lotteryOrder.push(order[lotteryIndex]);
         order.splice(lotteryIndex, 1);
         chance.splice(lotteryIndex, 1);
@@ -28,15 +29,14 @@ function addLotteryTeams() {
 }
 
 function addNonLotteryTeams() {
-    for (let i = 0; i < order.length; i++) {
-        lotteryOrder.push(order[i]);
-    }
+    for (let i = 0; i < order.length; i++) lotteryOrder.push(order[i]);
 }
 
 function applyChanges(change) {
     for (let i = 0; i < change.length; i++) {
-        const originalTeamName = initialOrder[change[i][0]];
-        const lotteryResult = getTeamIndex(originalTeamName);
+        const teamName = initialOrder[change[i][0]];
+        const lotteryResult = getTeamIndex(teamName);
+        // If lotteryResult falls outside the limits, change the pick owner
         if (lotteryResult < change[i][1] || lotteryResult > change[i][2]) {
             lotteryOrder[lotteryResult] = change[i][3];
         }
