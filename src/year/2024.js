@@ -15,6 +15,11 @@ export const order = [
     "GSW",
 ];
 
+// Index of original pick owner
+// Index of upper limit
+// Index of lower limit
+// Name of new pick owner if pick falls outside the limits
+
 export const change = [
     [5, 0, 5, "TOR>SAS"],
     [7, 0, 9, "UTA>OKC"],

@@ -1,18 +1,18 @@
 export const order = [
-    "DET",
     "HOU",
-    "SAS",
-    "CHA",
-    "POR",
+    "DET",
     "ORL",
-    "IND",
-    "WAS",
-    "UTA",
-    "DAL",
-    "CHI",
     "OKC",
+    "CLE",
+    "MIN",
     "TOR",
+    "CHI",
+    "SAC",
     "NOP",
+    "CHA",
+    "SAS",
+    "IND",
+    "GSW",
 ];
 
 // Index of original pick owner
@@ -21,9 +21,10 @@ export const order = [
 // Name of new pick owner if pick falls outside the limits
 
 export const change = [
-    [9, 0, 9, "DAL>NYK"],
-    [10, 0, 3, "CHI>ORL"],
+    [0, 0, 3, "HOU>OKC"],
+    [5, 0, 2, "MIN>GSW"],
+    [7, 0, 3, "CHI>ORL"],
 ];
 
-export const chance = [140, 140, 140, 125, 105, 90, 68, 67, 45, 30, 18, 17, 10, 5];
+export const chance = [140, 140, 140, 115, 115, 90, 75, 45, 45, 45, 18, 17, 10, 5];
 export const lotteryTeams = 4;

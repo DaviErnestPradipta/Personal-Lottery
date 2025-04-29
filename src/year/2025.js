@@ -16,8 +16,8 @@ export const order = [
 ];
 
 // Index of original pick owner
-// Index of upper limit, if applicable
-// Index of lower limit, if applicable
+// Index of upper limit
+// Index of lower limit
 // Name of new pick owner if pick falls outside the limits
 
 export const change = [

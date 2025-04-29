@@ -15,6 +15,11 @@ export const order = [
     "CLE",
 ];
 
+// Index of original pick owner
+// Index of upper limit
+// Index of lower limit
+// Name of new pick owner if pick falls outside the limits
+
 export const change = [
     [7, 0, 9, "LAL>MEM"],
     [7, 0, 11, "LAL"],
