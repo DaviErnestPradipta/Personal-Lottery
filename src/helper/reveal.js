@@ -1,24 +1,30 @@
 const ONE_SECOND = 1000;
 
-export const revealPick = (index, team, delay, runID, currentRunID, draftTeamArray, signal) => {
+const setRevealTimeout = (delay, callback, signal) => {
     const timeoutId = setTimeout(() => {
-        if (runID === currentRunID && !signal.aborted) {
-            draftTeamArray[index].textContent = team;
+        if (!signal.aborted) {
+            callback();
         }
     }, delay);
 
     signal.addEventListener('abort', () => clearTimeout(timeoutId));  // Abort the timeout if the signal is aborted
+};
+
+export const revealPick = (index, team, delay, runID, currentRunID, draftTeamArray, signal) => {
+    if (runID === currentRunID) {
+        setRevealTimeout(delay, () => {
+            draftTeamArray[index].textContent = team;
+        }, signal);
+    }
     return delay;
 };
 
 export const revealResultID = (resultID, delay, runID, currentRunID, resultIDElement, signal) => {
-    const timeoutId = setTimeout(() => {
-        if (runID === currentRunID && !signal.aborted) {
+    if (runID === currentRunID) {
+        setRevealTimeout(delay, () => {
             resultIDElement.textContent = `Result ID: ${resultID}`;
-        }
-    }, delay);
-
-    signal.addEventListener('abort', () => clearTimeout(timeoutId));  // Abort the timeout if the signal is aborted
+        }, signal);
+    }
 };
 
 export const ONE_SECOND_DELAY = ONE_SECOND;
