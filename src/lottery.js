@@ -4,7 +4,7 @@ import {
     change, 
     chance as initialChance, 
     lotteryTeams
-} from './2025.js';
+} from './year/2025.js';
 export const lotteryOrder = [];
 export const lotteryTeamCount = lotteryTeams;
 
