@@ -1,4 +1,4 @@
-import { getDOMElements, clearResults } from './DOM.js';
+import { getDOMElements, clearResults, addTradeShift } from './DOM.js';
 import { revealPick, revealResultID, ONE_SECOND_DELAY } from './reveal.js';
 import { addLotteryTeams, addNonLotteryTeams, applyChanges, getResultID } from './draw.js';
 
@@ -42,6 +42,9 @@ async function loadDraftData(year) {
     let { lotteryOrder, remainingOrder } = addLotteryTeams(order, chance, lotteryTeams);
     lotteryOrder = addNonLotteryTeams(lotteryOrder, remainingOrder);
     applyChanges(lotteryOrder, initialOrder, change);
+
+    // Add trade shift information to the UI
+    addTradeShift(change, initialOrder);
 
     return { initialOrder, lotteryOrder, lotteryTeams };
 }

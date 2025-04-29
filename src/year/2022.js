@@ -22,7 +22,6 @@ export const order = [
 
 export const change = [
     [7, 0, 9, "LAL>MEM"],
-    [7, 0, 11, "LAL"],
 ];
 
 export const chance = [140, 140, 140, 125, 105, 90, 75, 60, 45, 30, 20, 15, 10, 5];
