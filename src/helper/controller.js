@@ -5,33 +5,55 @@ import { addLotteryTeams, addNonLotteryTeams, applyChanges, getResultID } from '
 let controller;
 
 export async function handleDraft(year, currentRunID) {
-    const { draftTeamArray, resultIDElement } = getDOMElements();
-
-    clearResults(draftTeamArray, resultIDElement);
     if (controller) controller.abort();
     controller = new AbortController();
 
-    const { order: initialOrder, chance: initialChance, change, lotteryTeams } = 
+    const { draftTeamArray, resultIDElement } = getDOMElements();
+    clearResults(draftTeamArray, resultIDElement);
+
+    const data = await loadDraftData(year);
+    const resultID = getResultID(data.lotteryOrder, data.initialOrder, data.lotteryTeams);
+
+    const finalDelay = runRevealSequence(
+        data.lotteryOrder,
+        data.lotteryTeams,
+        currentRunID,
+        draftTeamArray,
+        controller.signal
+    );
+
+    revealResultID(
+        resultID,
+        finalDelay + ONE_SECOND_DELAY,
+        currentRunID,
+        currentRunID,
+        resultIDElement,
+        controller.signal
+    );
+}
+
+async function loadDraftData(year) {
+    const { order: initialOrder, chance: initialChance, change, lotteryTeams } =
         await import(`../year/${year}.js`);
 
     let order = [...initialOrder];
     let chance = [...initialChance];
 
-    let { lotteryOrder, remainingOrder } = 
-        addLotteryTeams(order, chance, lotteryTeams);
+    let { lotteryOrder, remainingOrder } = addLotteryTeams(order, chance, lotteryTeams);
     lotteryOrder = addNonLotteryTeams(lotteryOrder, remainingOrder);
     applyChanges(lotteryOrder, initialOrder, change);
 
-    const resultID = getResultID(lotteryOrder, initialOrder, lotteryTeams);
-
-    let delay = 0;
-    const finalDelay = revealAllPicks(lotteryOrder, lotteryTeams, delay, 
-        currentRunID, draftTeamArray, controller.signal);
-    revealResultID(resultID, finalDelay + ONE_SECOND_DELAY, 
-        currentRunID, currentRunID, resultIDElement, controller.signal);
+    return { initialOrder, lotteryOrder, lotteryTeams };
 }
 
-function revealAllPicks(lotteryOrder, lotteryTeamsCount, delay, currentRunID, draftTeamArray, signal) {
+function runRevealSequence(
+    lotteryOrder,
+    lotteryTeamsCount,
+    currentRunID,
+    draftTeamArray,
+    signal) {
+    let delay = 0;
+
     // Non-lottery picks
     for (let i = 0; i < lotteryOrder.length - lotteryTeamsCount; i++) {
         delay = revealPick(
@@ -54,7 +76,7 @@ function revealAllPicks(lotteryOrder, lotteryTeamsCount, delay, currentRunID, dr
             currentRunID,
             currentRunID,
             draftTeamArray,
-            signal 
+            signal
         );
     }
 
