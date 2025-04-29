@@ -6,11 +6,11 @@ export const order = [
     "IND",
     "POR",
     "SAC",
-    "LAL>NOP",
+    "NOP",
     "SAS",
     "WAS",
     "NYK",
-    "LAC>OKC",
+    "OKC",
     "CHA",
     "CLE",
 ];
