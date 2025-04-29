@@ -6,6 +6,7 @@ import {
     lotteryTeams
 } from './2025.js';
 export const lotteryOrder = [];
+export const lotteryTeamCount = lotteryTeams;
 
 let order = [...initialOrder];
 let chance = [...initialChance];
