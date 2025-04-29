@@ -7,9 +7,9 @@ let currentRunID = 0;
 document.addEventListener('DOMContentLoaded', () => {
     const { yearSelect, startButton } = getDOMElements();
 
-    startButton.addEventListener('click', async () => {
+    startButton.addEventListener('click', () => {
         const selectedYear = yearSelect.value;
-        await handleDraft(selectedYear, currentRunID);
+        handleDraft(selectedYear, currentRunID);
         currentRunID++;
     });
 });
