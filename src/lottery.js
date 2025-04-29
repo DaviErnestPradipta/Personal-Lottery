@@ -1,6 +1,5 @@
-import {order, change} from './2025.js';
+import {order, change, chance, lotteryTeams} from './2025.js';
 export const lotteryOrder = [];
-let chance = [140, 140, 140, 125, 105, 90, 75, 60, 38, 37, 18, 17, 8, 7];
 
 // Initialization
 addLotteryTeams();
@@ -9,7 +8,7 @@ applyChanges(change);
 
 // Main Functions
 function addLotteryTeams() {
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < lotteryTeams; i++) {
         let totalChance = getTotalChance(chance);
         let lotteryNumber = getLotteryNumber(totalChance);
         let lotteryIndex = getLotteryIndex(lotteryNumber);

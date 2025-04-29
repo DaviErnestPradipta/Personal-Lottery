@@ -1,18 +1,18 @@
 export const order = [
-    "Utah Jazz",
-    "Washington Wizards",
-    "Charlotte Hornets",
-    "New Orleans Pelicans",
-    "Philadelphia 76ers",
-    "Brooklyn Nets",
-    "Toronto Raptors",
-    "San Antonio Spurs",
-    "Phoenix Suns",
-    "Portland Trail Blazers",
-    "Dallas Mavericks",
-    "Chicago Bulls",
-    "Sacramento Kings",
-    "Atlanta Hawks",
+    "UTA",
+    "WAS",
+    "CHA",
+    "NOP",
+    "PHI",
+    "BKN",
+    "TOR",
+    "SAS",
+    "PHX",
+    "POR",
+    "DAL",
+    "CHI",
+    "SAC",
+    "ATL",
 ];
 
 // Index of original pick owner
@@ -21,6 +21,9 @@ export const order = [
 // Name of new pick owner if pick falls outside the limits
 
 export const change = [
-    [4, 0, 5, "Oklahoma City Thunder (from Philadelphia 76ers)"],
-    [12, 0, 11, "Atlanta Hawks (from Sacramento Kings)"],
+    [4, 0, 5, "PHI→OKC"],
+    [12, 0, 11, "SAC→ATL"],
 ]
+
+export const chance = [140, 140, 140, 125, 105, 90, 75, 60, 38, 37, 18, 17, 8, 7];
+export const lotteryTeams = 4;
