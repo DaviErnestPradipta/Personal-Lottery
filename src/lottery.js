@@ -47,9 +47,11 @@ function getResultID(lotteryOrder) {
     let resultID = 0;
     const totalTeams = lotteryOrder.length;
     for (let i = 0; i < lotteryTeams - 1; i++) {
-        resultID += lotteryOrder[i] * getPermutation(totalTeams - (i + 1), lotteryTeams - (i + 1));
+        const teamIndex = initialOrder.indexOf(lotteryOrder[i]);
+        resultID += teamIndex * getPermutation(totalTeams - (i + 1), lotteryTeams - (i + 1));
     }
-    resultID += lotteryOrder[lotteryTeams - 1];
+    const lastTeamIndex = initialOrder.indexOf(lotteryOrder[lotteryTeams - 1]);
+    resultID += lastTeamIndex;
     return resultID;
 }
 
