@@ -1,4 +1,4 @@
-import { getPermutation, getFactorial } from './mathUtils.js';
+import { getPermutation } from './math.js';
 
 export const addLotteryTeams = (order, chance, lotteryTeamsCount) => {
     const lotteryOrder = [];

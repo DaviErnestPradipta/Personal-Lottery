@@ -1,7 +1,7 @@
 import './style.css';
-import { getDOMElements, clearResults } from './domHandlers.js';
-import { revealPick, revealResultID, ONE_SECOND_DELAY } from './reveal.js';
-import { addLotteryTeams, addNonLotteryTeams, applyChanges, getResultID } from './drawLogic.js';
+import { getDOMElements, clearResults } from './helper/DOM.js';
+import { revealPick, revealResultID, ONE_SECOND_DELAY } from './helper/reveal.js';
+import { addLotteryTeams, addNonLotteryTeams, applyChanges, getResultID } from './helper/draw.js';
 
 let currentRunID = 0;
 
@@ -14,7 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedYear = yearSelect.value;
         clearResults(draftTeamArray, resultIDElement);
 
-        const { order: initialOrder, chance: initialChance, change, lotteryTeams: lotteryTeamsCount } = await import(`./year/${selectedYear}.js`);
+        const 
+        { 
+            order: initialOrder,
+            chance: initialChance,
+            change,
+            lotteryTeams: lotteryTeamsCount
+        } = await import(`./year/${selectedYear}.js`);
 
         let order = [...initialOrder];
         let chance = [...initialChance];
@@ -50,13 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         }
 
-        if (lotteryOrder.length > 1) {
-            delay = revealPick(1, lotteryOrder[1], delay + ONE_SECOND_DELAY * 5, runID, currentRunID, draftTeamArray);
-        }
-        if (lotteryOrder.length > 0) {
-            delay = revealPick(0, lotteryOrder[0], delay + ONE_SECOND_DELAY, runID, currentRunID, draftTeamArray);
-        }
-
+        delay = revealPick(1, lotteryOrder[1], delay + ONE_SECOND_DELAY * 5, runID, currentRunID, draftTeamArray);
+        delay = revealPick(0, lotteryOrder[0], delay + ONE_SECOND_DELAY, runID, currentRunID, draftTeamArray);
         revealResultID(resultID, delay + ONE_SECOND_DELAY, runID, currentRunID, resultIDElement);
     });
 });
