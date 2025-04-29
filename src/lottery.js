@@ -1,4 +1,3 @@
-// lottery.js
 import { 
     order as initialOrder, 
     change, 
