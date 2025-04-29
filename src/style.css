@@ -1,9 +1,17 @@
+:root {
+    --main-color: rgb(100, 150, 100);
+    --scale-size: 1rem;
+    --main-border: calc(var(--scale-size) / 8) solid black;
+    --lottery-border: calc(var(--scale-size) / 8) solid var(--main-color);
+}
+
 * {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1rem;
 }
 
 html, body {
+    height: 100vh;
     margin: 0;
     padding: 0;
 }
@@ -15,15 +23,16 @@ body {
 }
 
 header, footer {
-    margin: 1rem;
+    margin: var(--scale-size);
 }
 
 header {
-    font-size: 2rem;
+    font-size: calc(2 * var(--scale-size));
     font-weight: bolder;
 }
 
 .content {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,37 +41,65 @@ header {
 .dropdown-container {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: var(--scale-size);
+    margin-bottom: var(--scale-size);
+}
+
+select, button,
+.draft-item > div {
+    padding: calc(var(--scale-size) / 2);
+    border: var(--main-border);
+}
+
+select, button {
+    background-color: white;
+    border-radius: calc(var(--scale-size) / 4);
+    font-size: var(--scale-size);
+    cursor: pointer;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select option:checked,
+button:hover,
+.draft-item:hover {
+    background-color: var(--main-color);
+    color: white;
 }
 
 .draft-grid {
     display: grid;
-    grid-template-rows: repeat(14, 1fr);
-    margin-bottom: 20px;
+    grid-template-rows: repeat(14, calc(var(--scale-size) * 2.5));
+    margin-bottom: 1rem;
 }
 
 .draft-item {
     display: grid;
-    grid-template-columns: 1fr 3fr;
-}
-
-.draft-item:hover {
-    background-color: rgb(100, 150, 100);
-    color: white;
-}
-
-.draft-item > div {
-    padding: 0.5rem;
-    border: 0.125rem solid black;
+    grid-template-columns: calc(2.5 * var(--scale-size)) calc(7.5 * var(--scale-size));
 }
 
 .draft-item:nth-child(4) {
-    border-bottom: 0.125rem solid green;
+    border-bottom: var(--lottery-border);
+}
+
+.draft-number,
+.draft-team {
+    display: flex;
+    align-items: center;
 }
 
 .draft-number {
-    display: flex;
     justify-content: flex-end;
-    align-items: center;
+}
+
+.draft-team {
+    justify-content: flex-start;
+}
+
+footer {
+    justify-content: flex-end;
 }
