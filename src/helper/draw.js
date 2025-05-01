@@ -38,7 +38,7 @@ export const applyChanges = (lotteryOrder, initialOrder, change) => {
 
 export const getResultID = (lotteryOrder, initialOrder, lotteryTeamsCount) => {
     let resultID = 0;
-    const totalTeams = lotteryOrder.length;
+    const totalTeams = initialOrder.length;
     for (let i = 0; i < lotteryTeamsCount - 1; i++) {
         const teamIndex = initialOrder.indexOf(lotteryOrder[i]);
         resultID += teamIndex * getPermutation(totalTeams - (i + 1), lotteryTeamsCount - (i + 1));
