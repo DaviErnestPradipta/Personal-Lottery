@@ -26,5 +26,5 @@ export const change = [
     [13, 0, 0, "PHI>BOS"],
 ];
 
-export const chance = [140, 140, 140, 125, 105, 90, 60, 60, 60, 30, 20, 10, 10, 0];
+export const chance = [140, 140, 140, 125, 105, 90, 60, 60, 60, 30, 20, 10, 10, 10];
 export const lotteryTeams = 4;
