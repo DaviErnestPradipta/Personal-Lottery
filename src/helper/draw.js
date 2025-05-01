@@ -36,13 +36,13 @@ export const applyChanges = (lotteryOrder, initialOrder, change) => {
     }
 };
 
-export const getResultID = (lotteryOrder, initialOrder, lotteryTeamsCount) => {
+export const getResultID = (order, initialOrder, lotteryTeamsCount) => {
     let resultID = 0;
     const totalTeams = initialOrder.length;
     for (let i = 0; i < lotteryTeamsCount - 1; i++) {
-        const teamIndex = initialOrder.indexOf(lotteryOrder[i]);
+        const teamIndex = initialOrder.indexOf(order[i]);
         resultID += teamIndex * getPermutation(totalTeams - (i + 1), lotteryTeamsCount - (i + 1));
     }
-    resultID += initialOrder.indexOf(lotteryOrder[lotteryTeamsCount - 1]);
+    resultID += initialOrder.indexOf(order[lotteryTeamsCount - 1]);
     return resultID;
 };

@@ -8,12 +8,14 @@ export async function handleDraft(year, currentRunID) {
     if (controller) controller.abort();
     controller = new AbortController();
 
-    const { draftTeamArray, resultIDElement } = getDOMElements();
-    clearResults(draftTeamArray, resultIDElement);
+    const { draftTeamArray, resultIDElement, actualIDElement } = getDOMElements();
+    clearResults(draftTeamArray, resultIDElement, actualIDElement);
 
     const data = await loadDraftData(year);
     applyLotteryBorder(draftTeamArray, data.lotteryTeams);
+
     const resultID = getResultID(data.lotteryOrder, data.initialOrder, data.lotteryTeams);
+    const actualID = getResultID(data.actualOrder, data.initialOrder, data.lotteryTeams);
 
     const finalDelay = runRevealSequence(
         data.lotteryOrder,
@@ -29,23 +31,40 @@ export async function handleDraft(year, currentRunID) {
         currentRunID,
         currentRunID,
         resultIDElement,
-        controller.signal
+        controller.signal,
+        'Result ID'
+    );
+
+    revealResultID(
+        actualID,
+        finalDelay + ONE_SECOND_DELAY,
+        currentRunID,
+        currentRunID,
+        actualIDElement,
+        controller.signal,
+        'Actual ID'
     );
 }
 
 async function loadDraftData(year) {
-    const { order: initialOrder, chance: initialChance, change, lotteryTeams } =
-        await import(`../year/${year}.js`);
+    const {
+        order: initialOrder,
+        chance: initialChance,
+        actual,
+        lotteryTeams,
+        change,
+    } = await import(`../year/${year}.js`);
 
     let order = [...initialOrder];
     let chance = [...initialChance];
+    let actualOrder = actual.map(i => order[i]);
     let { lotteryOrder, remainingOrder } = addLotteryTeams(order, chance, lotteryTeams);
     
     lotteryOrder = addNonLotteryTeams(lotteryOrder, remainingOrder);
     applyChanges(lotteryOrder, initialOrder, change);
     addTradeShift(change, initialOrder);
     
-    return { initialOrder, lotteryOrder, lotteryTeams };
+    return { initialOrder, lotteryOrder, lotteryTeams, actualOrder };
 }
 
 function runRevealSequence(

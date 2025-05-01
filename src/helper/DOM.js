@@ -4,12 +4,14 @@ export const getDOMElements = () => {
         startButton: document.getElementById('start-button'),
         draftTeamArray: [...document.querySelectorAll('.draft-team')],
         resultIDElement: document.querySelector('.result-ID'),
+        actualIDElement: document.querySelector('.actual-ID'),
     };
 };
 
-export const clearResults = (draftTeamArray, resultIDElement) => {
+export const clearResults = (draftTeamArray, resultIDElement, actualIDElement) => {
     draftTeamArray.forEach(el => el.textContent = '');
     resultIDElement.textContent = '';
+    actualIDElement.textContent = '';
 };
 
 export const addTradeShift = (change, order) => {

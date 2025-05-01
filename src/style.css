@@ -74,7 +74,7 @@ button:hover,
 .draft-grid {
     display: grid;
     grid-template-rows: repeat(14, calc(var(--scale-size) * 2.5));
-    margin-bottom: 1rem;
+    margin-bottom: var(--scale-size);
 }
 
 .draft-item {

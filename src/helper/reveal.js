@@ -10,7 +10,8 @@ const setRevealTimeout = (delay, callback, signal) => {
     signal.addEventListener('abort', () => clearTimeout(timeoutId));  // Abort the timeout if the signal is aborted
 };
 
-export const revealPick = (index, team, delay, runID, currentRunID, draftTeamArray, signal) => {
+export const revealPick = (index, team, delay, 
+runID, currentRunID, draftTeamArray, signal) => {
     if (runID === currentRunID) {
         setRevealTimeout(delay, () => {
             draftTeamArray[index].textContent = team;
@@ -19,10 +20,12 @@ export const revealPick = (index, team, delay, runID, currentRunID, draftTeamArr
     return delay;
 };
 
-export const revealResultID = (resultID, delay, runID, currentRunID, resultIDElement, signal) => {
+export const revealResultID = (resultID, delay, runID, currentRunID, 
+resultIDElement, signal, label = 'Result ID') => {
+    if (resultID === 0) resultID = "TBD";
     if (runID === currentRunID) {
         setRevealTimeout(delay, () => {
-            resultIDElement.textContent = `Result ID: ${resultID}`;
+            resultIDElement.textContent = `${label}: ${resultID}`;
         }, signal);
     }
 };
