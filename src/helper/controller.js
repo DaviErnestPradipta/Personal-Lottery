@@ -1,4 +1,4 @@
-import { getDOMElements, clearResults, addTradeShift } from './DOM.js';
+import { getDOMElements, clearResults, addTradeShift, applyLotteryBorder } from './DOM.js';
 import { revealPick, revealResultID, ONE_SECOND_DELAY } from './reveal.js';
 import { addLotteryTeams, addNonLotteryTeams, applyChanges, getResultID } from './draw.js';
 
@@ -12,6 +12,7 @@ export async function handleDraft(year, currentRunID) {
     clearResults(draftTeamArray, resultIDElement);
 
     const data = await loadDraftData(year);
+    applyLotteryBorder(draftTeamArray, data.lotteryTeams);
     const resultID = getResultID(data.lotteryOrder, data.initialOrder, data.lotteryTeams);
 
     const finalDelay = runRevealSequence(

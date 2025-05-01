@@ -26,3 +26,8 @@ export const addTradeShift = (change, order) => {
         tradeShiftList.appendChild(listItem);
     });
 };
+
+export const applyLotteryBorder = (draftTeamArray, lotteryTeamsCount) => {
+    draftTeamArray.forEach(el => el.parentElement.classList.remove('lottery-separator'));
+    draftTeamArray[lotteryTeamsCount - 1].parentElement.classList.add('lottery-separator');
+};

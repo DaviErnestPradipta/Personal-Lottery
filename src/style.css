@@ -82,7 +82,7 @@ button:hover,
     grid-template-columns: calc(2.5 * var(--scale-size)) calc(7.5 * var(--scale-size));
 }
 
-.draft-item:nth-child(4) {
+.lottery-separator {
     border-bottom: var(--lottery-border);
 }
 
