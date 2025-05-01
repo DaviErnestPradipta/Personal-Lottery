@@ -15,6 +15,10 @@ export const order = [
     "GSW",
 ];
 
+export const chance = [140, 140, 133, 132, 105, 90, 75, 60, 45, 30, 20, 15, 8, 7];
+export const actual = [9, 1, 8, 4];
+export const lotteryTeams = 4;
+
 // Index of original pick owner
 // Index of upper limit
 // Index of lower limit
@@ -26,6 +30,3 @@ export const change = [
     [11, 0, 3, "HOU>OKC"],
     [13, 0, 3, "GSW>POR"],
 ];
-
-export const chance = [140, 140, 133, 132, 105, 90, 75, 60, 45, 30, 20, 15, 8, 7];
-export const lotteryTeams = 4;

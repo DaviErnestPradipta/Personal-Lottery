@@ -15,6 +15,10 @@ export const order = [
     "MEM",
 ];
 
+export const chance = [140, 140, 140, 125, 105, 90, 75, 60, 45, 30, 20, 13, 12, 5];
+export const actual = [2, 0, 7, 6];
+export const lotteryTeams = 4;
+
 // Index of original pick owner
 // Index of upper limit
 // Index of lower limit
@@ -23,6 +27,3 @@ export const order = [
 export const change = [
     [13, 0, 3, "MEM>BOS"],
 ];
-
-export const chance = [140, 140, 140, 125, 105, 90, 75, 60, 45, 30, 20, 13, 12, 5];
-export const lotteryTeams = 4;

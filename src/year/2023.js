@@ -15,6 +15,10 @@ export const order = [
     "NOP",
 ];
 
+export const chance = [140, 140, 140, 125, 105, 90, 68, 67, 45, 30, 18, 17, 10, 5];
+export const actual = [2, 3, 4, 1];
+export const lotteryTeams = 4;
+
 // Index of original pick owner
 // Index of upper limit
 // Index of lower limit
@@ -24,6 +28,3 @@ export const change = [
     [9, 0, 9, "DAL>NYK"],
     [10, 0, 3, "CHI>ORL"],
 ];
-
-export const chance = [140, 140, 140, 125, 105, 90, 68, 67, 45, 30, 18, 17, 10, 5];
-export const lotteryTeams = 4;
