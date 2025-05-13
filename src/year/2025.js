@@ -7,16 +7,16 @@ export const order = [
     "BKN",
     "TOR",
     "SAS",
-    "PHX",
+    "HOU",
     "POR",
     "DAL",
     "CHI",
     "SAC",
-    "ATL",
+    "SAC",
 ];
 
 export const chance = [140, 140, 140, 125, 105, 90, 75, 60, 38, 37, 18, 17, 8, 7];
-export const actual = [0, 0, 0, 0];
+export const actual = [10, 7, 4, 2];
 export const lotteryTeams = 4;
 
 // Index of original pick owner
